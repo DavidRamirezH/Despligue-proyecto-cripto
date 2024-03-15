@@ -1,0 +1,6970 @@
+openapi: 3.0.0
+info:
+  title: Bicrypto API
+  version: 1.0.1
+paths:
+  /api/auth/register:
+    post:
+      summary: register
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                '?ref':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: &ref_1
+                type: object
+                properties:
+                  status:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      result:
+                        type: object
+                      message:
+                        type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: &ref_0
+                type: object
+                properties:
+                  status:
+                    type: string
+                  error:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/login:
+    post:
+      summary: login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/login/wallet:
+    post:
+      summary: loginWithWallet
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                walletAddress:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/login/chat:
+    get:
+      summary: loginChat
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/nonce:
+    get:
+      summary: generateNonce
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/wallet/verify:
+    post:
+      summary: verifyMessage
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                signature:
+                  type: string
+                walletAddress:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/login/otp:
+    post:
+      summary: loginOtp
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                otp:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/login/otp/resend:
+    post:
+      summary: resendOtp
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                uuid:
+                  type: string
+                secret:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/logout:
+    post:
+      summary: logout
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/profile:
+    get:
+      summary: profile
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    put:
+      summary: update
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/reset:
+    post:
+      summary: resetPassword
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/verifyreset:
+    post:
+      summary: verifyResetPassword
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/verify/email/send:
+    post:
+      summary: sendEmailVerification
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/auth/verify/email/token:
+    post:
+      summary: verifyEmail
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/settings:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/settings/extensions:
+    get:
+      summary: extensions
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/profile/generateOTPSecret:
+    post:
+      summary: generateOTPSecret
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                '?email':
+                  type: string
+                '?phoneNumber':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/profile/verifyOTP:
+    post:
+      summary: verifyOTP
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: string
+                secret:
+                  type: string
+                type:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/profile/saveOTP:
+    post:
+      summary: saveOTP
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                secret:
+                  type: string
+                type:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/profile/toggleOtp:
+    post:
+      summary: toggleOtp
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/authors:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/authors/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/posts:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                post:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/posts/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/posts/:slug:
+    put:
+      summary: update
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                post:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/categories:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/categories/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/tags:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/blog/tags/:slug:
+    get:
+      summary: show
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/notifications:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notification:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/notifications/:id:
+    delete:
+      summary: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/currencies:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/currencies/:currencyId:
+    get:
+      summary: show
+      parameters:
+        - name: currencyId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/binary/orders:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/binary/orders/:uuid:
+    get:
+      summary: show
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    delete:
+      summary: cancel
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                percentage:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/chart/historical:
+    get:
+      summary: getHistorical
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/currencies:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/currencies/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/markets:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/markets/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/markets/:currency/:pair/ticker:
+    get:
+      summary: ticker
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pair
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/markets/:currency/:pair/orderbook:
+    get:
+      summary: orderbook
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pair
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/markets/tickers/all:
+    get:
+      summary: tickers
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/orders:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symbol:
+                  type: string
+                type:
+                  type: string
+                side:
+                  type: string
+                amount:
+                  type: string
+                price:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/orders/:uuid:
+    get:
+      summary: show
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    delete:
+      summary: cancel
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/orders/:uuid/status:
+    get:
+      summary: check
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/exchange/watchlist:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symbol:
+                  type: string
+                type:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment/uuid/:uuid:
+    get:
+      summary: show
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment/user:
+    get:
+      summary: user
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment/:id:
+    put:
+      summary: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    delete:
+      summary: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment/:uuid/cancel:
+    put:
+      summary: cancel
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment-plan:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/investment-plan/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/kyc:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateId:
+                  type: string
+                template:
+                  type: string
+                level:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/kyc/:id:
+    put:
+      summary: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                updatedData:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/kyc-template:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/pages:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/pages/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/support/chat:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: send
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ticket:
+                  type: string
+                message:
+                  type: string
+                isSupport:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/support/chat/metadata:
+    post:
+      summary: getMetadata
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/support/tickets:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ticket:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/support/tickets/:ticketId:
+    get:
+      summary: show
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/support/tickets/close/:ticketId:
+    put:
+      summary: close
+      parameters:
+        - name: ticketId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit/methods:
+    get:
+      summary: depositMethods
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit/methods/:id:
+    get:
+      summary: depositMethod
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit/gateways:
+    get:
+      summary: depositGateways
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit/gateways/:id:
+    get:
+      summary: depositGateway
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/withdraw/methods:
+    get:
+      summary: withdrawMethods
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/withdraw/methods/:id:
+    get:
+      summary: withdrawMethod
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit:
+    post:
+      summary: deposit
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transaction:
+                  type: string
+                currency:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/withdraw:
+    post:
+      summary: withdraw
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet:
+                  type: string
+                methodId:
+                  type: string
+                amount:
+                  type: string
+                total:
+                  type: string
+                custom_data:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fiat/deposit/method:
+    post:
+      summary: customDeposit
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet:
+                  type: string
+                methodId:
+                  type: string
+                amount:
+                  type: string
+                total:
+                  type: string
+                custom_data:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/:currency:
+    get:
+      summary: index
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/transactions/:trx:
+    get:
+      summary: transactions
+      parameters:
+        - name: trx
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/deposit:
+    post:
+      summary: deposit
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_id:
+                  type: string
+                trx:
+                  type: string
+                chain:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/deposit/verify/:trx:
+    post:
+      summary: depositVerify
+      parameters:
+        - name: trx
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/deposit/cancel/:trx:
+    post:
+      summary: depositCancel
+      parameters:
+        - name: trx
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/spot/withdraw:
+    post:
+      summary: withdraw
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                chain:
+                  type: string
+                amount:
+                  type: string
+                address:
+                  type: string
+                '?memo':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                type:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/wallet:
+    get:
+      summary: show
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/fetch:
+    get:
+      summary: fetch
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/balance:
+    get:
+      summary: balance
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/transfer:
+    post:
+      summary: transfer
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                type:
+                  type: string
+                amount:
+                  type: string
+                to:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/transactions:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/wallets/transactions/:referenceId:
+    get:
+      summary: show
+      parameters:
+        - name: referenceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/frontend:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ai-trading:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan_id:
+                  type: string
+                duration:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                pair:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ai-trading/fetch/active:
+    get:
+      summary: active
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ai-trading/:uuid:
+    get:
+      summary: status
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ai-trading/plans:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/categories:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/categories/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/products:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/products/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/orders:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/orders/create:
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_ids:
+                  type: string
+                quantities:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/orders/store:
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                '?discount_id':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/orders/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/reviews/:product_id:
+    post:
+      summary: create
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: string
+                comment:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/discounts/:product_id:
+    post:
+      summary: apply
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/wishlist:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/wishlist/add:
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecommerce/wishlist/remove/:product_id:
+    delete:
+      summary: delete
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/wallets:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/wallets/:currency:
+    get:
+      summary: show
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/wallets/:chain/address:
+    get:
+      summary: depositAddress
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/wallets/:uuid/withdraw:
+    post:
+      summary: withdraw
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                chain:
+                  type: string
+                toAddress:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/wallets/:uuid/transfer:
+    post:
+      summary: transfer
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                currency:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/tokens:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/tokens/:currency:
+    get:
+      summary: show
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/markets:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/markets/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/orders:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                symbol:
+                  type: string
+                type:
+                  type: string
+                side:
+                  type: string
+                amount:
+                  type: string
+                price:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/orders/:uuid:
+    delete:
+      summary: cancel
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                created_at:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/orders/chart/historical:
+    get:
+      summary: getHistorical
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ecosystem/orders/ticker:
+    get:
+      summary: ticker
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/faq/categories:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/faq/categories/:identifier:
+    get:
+      summary: show
+      parameters:
+        - name: identifier
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/faq/entries:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/faq/entries/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/account:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/account/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/account/:id/deposit:
+    post:
+      summary: deposit
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                walletUuid:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/account/:id/withdraw:
+    post:
+      summary: withdraw
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/investments:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  type: string
+                planId:
+                  type: string
+                durationId:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/investments/active/investment:
+    get:
+      summary: active
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/investments/:id:
+    get:
+      summary: status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/investments/:id/cancel:
+    post:
+      summary: cancel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/forex/plans:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/projects:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/projects/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/tokens:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/tokens/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/phases:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/phases/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/contributions:
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phase_id:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/contributions/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/allocations:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/ico/allocations/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/affiliate/referrals:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/affiliate/rewards:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/affiliate/rewards/:id/claim:
+    post:
+      summary: claim
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/payment-methods:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                instructions:
+                  type: string
+                currency:
+                  type: string
+                '?image':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/payment-methods/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    put:
+      summary: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                instructions:
+                  type: string
+                currency:
+                  type: string
+                '?image':
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    delete:
+      summary: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/offers:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wallet_type:
+                  type: string
+                currency:
+                  type: string
+                amount:
+                  type: string
+                price:
+                  type: string
+                payment_method_id:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/offers/user:
+    get:
+      summary: userOffers
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/offers/show/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/offers/fetch/:uuid:
+    get:
+      summary: showUuid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/offers/:id:
+    put:
+      summary: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+    post:
+      summary: store
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offer_id:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid:
+    get:
+      summary: show
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/chat:
+    post:
+      summary: sendMessage
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                isSeller:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/cancel:
+    post:
+      summary: cancelTrade
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/markAsPaid:
+    post:
+      summary: markTradeAsPaid
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                txHash:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/dispute:
+    post:
+      summary: disputeTrade
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/cancelDispute:
+    post:
+      summary: cancelDispute
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/release:
+    post:
+      summary: releaseTrade
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/trades/:uuid/refund:
+    post:
+      summary: refundTrade
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/disputes:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/disputes/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/disputes/create:
+    post:
+      summary: create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                trade_id:
+                  type: string
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/p2p/reviews/:uuid:
+    post:
+      summary: create
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rating:
+                  type: string
+                comment:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking/pools:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking/pools/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking:
+    get:
+      summary: index
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking/:id:
+    get:
+      summary: show
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking/stake:
+    post:
+      summary: stake
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pool_id:
+                  type: string
+                amount:
+                  type: string
+                duration_id:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
+  /api/staking/withdraw:
+    post:
+      summary: withdraw
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                stake_id:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema: *ref_1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema: *ref_0
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: *ref_0
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: *ref_0
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema: *ref_0
